@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  kyiv:
+    build: ./cities/kyiv
+
+web:
+    build: ./webserver
+    ports:
+      - "8080:80"
+    depends_on:
+      - kyiv
+
+trivy:
+    build: ./security
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
